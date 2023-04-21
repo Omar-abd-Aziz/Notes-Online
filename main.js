@@ -59,7 +59,7 @@ window.onclick=(e)=>{
   }
 
   if(e.target.classList.value=="logOut"){
-    localStorage.setItem("doc-id","")
+    localStorage.setItem("notes-online-id","")
     location.href="./login/login.html"
   }
 
@@ -78,7 +78,7 @@ let noon = document.querySelector('#noon')
 
 /*1*/
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js';
-import { getFirestore, collection, getDocs,getDoc, setDoc, addDoc, doc } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
+import { getFirestore, collection, getDocs,getDoc, setDoc, addDoc, doc,where } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -107,8 +107,8 @@ return cityList;
 
 
 /* start get user doc */
-let docId=localStorage.getItem("doc-id");
-if(docId!==null&&docId!==''){
+let docId=localStorage.getItem("notes-online-id");
+if(docId!==null&&docId!==''){ 
   // console.log(docId)
 } else {
   location.href="./login/login.html"
@@ -191,7 +191,7 @@ function save() {
   let G = noon.innerHTML;
 
   /*start post*/
-  setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+  setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
     ...mainData,
     N: `${G}`,
   });
@@ -204,10 +204,19 @@ function save() {
 
 
 //btn for add note and save in local storage
-btn1.onclick=()=>{
+btn1.onclick=async()=>{
 
 
   let text=int.value;
+
+  // let id = Math.floor(Math.random() * 100000000);
+  // let date=showDate();
+  // await setDoc(doc(db,"Notes",`${id}`),{
+  //   id: id,
+  //   text: text,
+  //   dateInSecond: Date.now(),
+  //   date: date,
+  // })
   
   
   if (text !== ""&&text.trim()!==''|| src!==''&&text.trim()!==''||src!==''&&text.trim()==''){
@@ -1082,7 +1091,7 @@ dateBtn.addEventListener('click',()=>{
     console.log(dateGG)
 
     /*start post*/
-    setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+    setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
       ...mainData,
       dateGG: 1,
     });
@@ -1106,7 +1115,7 @@ dateBtn.addEventListener('click',()=>{
     console.log(dateGG)
 
     /*start post*/
-    setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+    setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
       ...mainData,
       dateGG: 0,
     });
@@ -1147,7 +1156,7 @@ Btext.addEventListener('click',()=>{
     
   
     /*start post*/
-    setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+    setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
       ...mainData,
       BtextGG: 1,
     });
@@ -1164,7 +1173,7 @@ Btext.addEventListener('click',()=>{
     
 
     /*start post*/
-    setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+    setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
       ...mainData,
       BtextGG: 0,
     });
@@ -1208,7 +1217,7 @@ imgBtn.addEventListener('click',()=>{
     
 
     /*start post*/
-    setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+    setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
       ...mainData,
       imgBtnGG: 1,
     });
@@ -1227,7 +1236,7 @@ imgBtn.addEventListener('click',()=>{
     
 
     /*start post*/
-    setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+    setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
       ...mainData,
       imgBtnGG: 0,
     });
@@ -1275,7 +1284,7 @@ toDoBtn.addEventListener('click',()=>{
     
 
     /*start post*/
-    setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+    setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
       ...mainData,
       toDoBtnGG: 1,
     });
@@ -1297,7 +1306,7 @@ toDoBtn.addEventListener('click',()=>{
     
 
     /*start post*/
-    setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+    setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
       ...mainData,
       toDoBtnGG: 0,
     });
@@ -1343,7 +1352,7 @@ copyBtn.addEventListener('click',()=>{
     
 
     /*start post*/
-    setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+    setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
       ...mainData,
       copyBtnGG: 1,
     });
@@ -1365,7 +1374,7 @@ copyBtn.addEventListener('click',()=>{
     
 
     /*start post*/
-    setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+    setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
       ...mainData,
       copyBtnGG: 0,
     });
@@ -1415,7 +1424,7 @@ editBtn.addEventListener('click',()=>{
    
 
     /*start post*/
-    setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+    setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
       ...mainData,
       editBtnGG: 1,
     });
@@ -1438,7 +1447,7 @@ editBtn.addEventListener('click',()=>{
     
 
     /*start post*/
-    setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+    setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
       ...mainData,
       editBtnGG: 0,
     });
@@ -1484,7 +1493,7 @@ deletBtn.addEventListener('click', () => {
     
 
     /*start post*/
-    setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+    setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
       ...mainData,
       deletBtnGG: 1,
     });
@@ -1507,7 +1516,7 @@ deletBtn.addEventListener('click', () => {
     
 
     /*start post*/
-    setDoc(doc(db, "accounts", localStorage.getItem("doc-id")), {
+    setDoc(doc(db, "accounts", localStorage.getItem("notes-online-id")), {
       ...mainData,
       deletBtnGG: 0,
     });

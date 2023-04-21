@@ -1,25 +1,4 @@
 
-/* start custom function */
-function $(e) {
-    return document.querySelector(e)
-}
-
-function $all(e) {
-    return document.querySelector(e)
-}
-
-function cs(e) {
-    return console.log(e)
-}
-/* end custom function */
-
-
-
-
-
-
-
-
 
 /////* start firebase */////
 
@@ -27,7 +6,7 @@ function cs(e) {
 
 /*1*/
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js';
-import { getFirestore, collection, getDocs,getDoc, setDoc, addDoc, doc } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
+import { getFirestore, collection, getDocs,getDoc, setDoc, addDoc, doc,query,where } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -56,62 +35,31 @@ async function getCit(db,X) {
 
 
 
-/* start set id on all docs */
-function setIdForAllDoc(){
-    getDocs(collection(db,"accounts")).then(snap=>{
-        snap.docs.forEach(el=>{
-            setDoc(doc(db,"accounts",el.id), {
-                ...el.data(),
-                id: el.id,
-            })
-        })
-        getCards()
-    })
-}
-setIdForAllDoc()
-/* end set id on all docs */
-
-
-
-
-/* start get accounts */
-let AllAccounts;
-function getCards() {
-    getCit(db, 'accounts').then(async (e) => {
-        AllAccounts = e;
-    })
-}
-/* end get accounts */
-
-
-
 /*Start Sing In*/
 
 
-$(".btn-sign-in").addEventListener("click",()=>{
-    var username = $(".username-in").value
-    var password = $(".password-in").value
-    var numOfFalse=0
-    if (username!=""&&password!="") {
-        AllAccounts.forEach(e=>{
-            numOfFalse++;
-            if(username==e.username&&password==e.password) {
-                $(".username-in").value=""
-                $(".password-in").value=""
-                /**/
-                localStorage.setItem("doc-id",e.id)
-                /**/
-                numOfFalse="true"
-                location.href="../index.html"
-            }
+document.querySelector(".btn-sign-in").addEventListener("click",async()=>{
+    let username =  document.querySelector(".username-in").value
+    let password =  document.querySelector(".password-in").value
 
-            if (numOfFalse>=AllAccounts.length){
+    if (username.trim()!==""&&password.trim()!=="") {
+
+        const q = query(collection(db, "accounts"), where("username", "==", `${username}`), where("password", "==", `${password}`));
+
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            if(doc.data().id!==undefined){
+                document.querySelector(".username-in").value=""
+                document.querySelector(".password-in").value=""
+                /**/
+                localStorage.setItem("notes-online-id",doc.data().id)
+                /**/
+                location.href="../index.html"
+            } else {
                 Swal.fire("","Usename Or Password Are Wrong");
-            } else if(numOfFalse=="true"){
-                location.href="../index.html"
             }
+        });
 
-        })
     } else {Swal.fire("","Enter Usename And Password")}
 
 })
@@ -119,28 +67,23 @@ $(".btn-sign-in").addEventListener("click",()=>{
 /*End Sing In*/
 
 
-/////* end firebase */////
-
-
-
-
 
 
 /* start create account */
 
-$(".btn-sign-up").addEventListener("click",()=>{
-    var username = $(".username-up").value
-    var password = $(".password-up").value
-    var password2 = $(".password-up-2").value
-    var email = $(".email-up").value
+document.querySelector(".btn-sign-up").addEventListener("click",()=>{
+    let username = document.querySelector(".username-up").value
+    let password = document.querySelector(".password-up").value
+    let password2 = document.querySelector(".password-up-2").value
+    let email = document.querySelector(".email-up").value
 
-
-    
 
     if(username!=""&&password!=""&&password2!=""&&email!=""&&password==password2)
     {
 
-      addDoc(collection(db,"accounts"),{
+      let id = Math.floor(Math.random() * 100000000);
+      setDoc(doc(db,"accounts",`${id}`),{
+        id: id,
         username: username,
         password: password,
         email: email,
@@ -148,12 +91,11 @@ $(".btn-sign-up").addEventListener("click",()=>{
         N:"",
       });
   
-      setIdForAllDoc()
 
-      $(".username-up").value=""
-      $(".password-up").value=""
-      $(".email-up").value=""
-      $(".password-up-2").value=""
+      document.querySelector(".username-up").value=""
+      document.querySelector(".password-up").value=""
+      document.querySelector(".email-up").value=""
+      document.querySelector(".password-up-2").value=""
 
       /**/
       Swal.fire(
@@ -163,7 +105,7 @@ $(".btn-sign-up").addEventListener("click",()=>{
       )
       /**/
 
-      $("#tab-1").click()
+      document.querySelector("#tab-1").click()
 
     } else if(username!=""&&password!=password2&&email!="") {
         Swal.fire("","The Two Password Should be the Same","")
