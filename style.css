@@ -43,27 +43,10 @@ body{
   font-weight: bold;
 }
 
-/*///////////////////////////////////////////////////////*/
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+.scroll::-webkit-scrollbar {
+   display: none;
 }
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-/*///////////////////////////////////////////////////////////*/
 
 
 #main #btn1 {
@@ -165,7 +148,6 @@ hr{
   color: white;
   padding: 0 5px 0px 5.5px;
   user-select: none;
-  cursor: pointer;
 }
 
 
@@ -182,8 +164,7 @@ hr{
   }
   
   
-  #d1 .ooo{
-    cursor: pointer;
+  #d1 .isDoneBtnForNote{
     position: absolute;
     left: calc(2% + 3px);
   }
@@ -218,8 +199,7 @@ hr{
 
   
   
-  #d1 .ooo{
-    cursor: pointer;
+  #d1 .isDoneBtnForNote{
     position: absolute;
     left: calc(1% + 3px);
   }
@@ -386,8 +366,7 @@ hr{
 
 /*start style for btn to check box*/
 
-.ooo{
-  cursor: pointer;
+.isDoneBtnForNote{
   background: transparent;
   background-size: cover;
   width: 22px;
@@ -689,7 +668,7 @@ hr{
   left: 50%;
   transform: translate(-50%,-50%);
   width: 330px;
-  height: 500px;
+  padding-bottom: 20px;
   z-index: 1;
   font-size: 20px;
   background: var(--main-color);
@@ -747,6 +726,7 @@ hr{
 
 #setting-d1 #span-2
 {
+  cursor: pointer;
   width: 20px;
   height: 20px;
   background: url(/img/gu.svg);
@@ -790,6 +770,7 @@ hr{
 
 #setting-d2 #span-2
 {
+  cursor: pointer;
   width: 20px;
   height: 20px;
   background: url(/img/gu.svg);
@@ -844,33 +825,126 @@ hr{
 
 
 
+  
+/* larg view */
+
+@media (min-width: 1300px) {
+  
+  #d1 #clear{
+    position: absolute;
+    left: calc(99% - 3px);
+  }
+  
+
+  
+  
+  #d1 .ooo{
+    cursor: pointer;
+    position: absolute;
+    left: calc(1% + 3px);
+  }
+
+
+  /*  */
 
 
 
+  #main
+  {
+    background: var(--main-color);
+    max-width: 70%;
+    margin: auto;
+  }
 
-/* start loader */
-.loaderDad{
-  display: none;
-  width: 100%;
-  height: 100%;
-  background: #00000084;
-  z-index: 5;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  #main #in
+  {
+    font-size: 23px;
+    padding: 10px 20px;
+  }
+
+  #main #lab
+  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+  }
+
+
+  #main #btn1
+  {
+    font-size: 20px;
+    width: 4rem;
+  }
+
+  #img0
+  {
+    max-width: 40%;
+
+  }
+
+  #main #btn2
+  {
+    font-size: 20px;
+  }
+
+  hr
+  {
+    max-width: 70%;
+  }
+
+  #noon
+  {
+    max-width: 80%;
+    margin: auto;
+  }
+
+  #d1
+  {
+    padding: 0px 30px 0px 28px;
+    margin: 20px auto;
+    background: var(--main-color);
+  }
+  
+  #d1 #text
+  {
+    font-family: sans-serif;
+    font-size: 30px;
+    padding: 17px 0px;
+  }
+
+  body
+  {
+    background: #E5E5E5;
+  }
+
+
+  :root
+  {
+    --main-color: #0078b7;
+  }
+
+  /*  */
+  
+  
 }
 
-.loader {
-  width: 120px;
-  height: 120px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: url(./img/loading.gif);
-  background-size: cover;
-  border-radius: 20px;
-}
 
-/* end loader */
+/* end of larg view */
+
+
+
+
+
+
+
+
+
+
+
+
+
+#clear,
+.isDoneBtnForNote{
+  cursor: pointer;
+}
