@@ -35,6 +35,13 @@ document.querySelector(".btn-sign-in").addEventListener("click",async()=>{
 
     if (username.trim()!==""&&password.trim()!=="") {
 
+        Swal.fire({
+            title: 'Please Wait!',
+            didOpen: () => {
+              Swal.showLoading()
+            }
+        });
+
         const q = query(collection(db, "accounts"), where("username", "==", `${username}`), where("password", "==", `${password}`));
         let snapshot = await getCountFromServer(q);
         console.log(snapshot.data().count);
