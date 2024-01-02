@@ -329,7 +329,7 @@ function showAllNotes(ArrayOfAllNotes){
         mainDiv.innerHTML+=`
         <div id="d1">
           
-          <p style="display: ${e.text==""?`none`:`block`};" id="text">${e.text}</p>
+          <p style="display: ${e.text==""?`none`:`block`};" dir="auto" id="text">${e.text}</p>
           
           ${(e.imgSrc==""||e.imgSrc==undefined)?``:`
           <br>
