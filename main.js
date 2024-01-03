@@ -411,10 +411,11 @@ window.onclick=async (e)=>{
     let oldText = document.querySelector("#in").value;
     let { value: text } = await Swal.fire({
       input: 'textarea',
-      inputLabel: 'Enter The Text..',
+      title: 'Enter The Text..',
       inputValue: `${oldText}`,
       inputAttributes: {
-        'aria-label': 'Enter The Text..'
+        'aria-label': 'Type your note here',
+        'dir': "auto",
       },
       showCancelButton: true
     })
@@ -565,10 +566,11 @@ window.onclick=async (e)=>{
 
     const { value: text } = await Swal.fire({
       input: 'textarea',
-      inputLabel: 'Edit It',
+      title: 'Edit It',
       inputValue: `${NoteDate.text}`,
       inputAttributes: {
-        'aria-label': 'Type your message here'
+        'aria-label': 'Type your message here',
+        'dir': "auto",
       },
       showCancelButton: true
     })
@@ -782,7 +784,7 @@ let btnup = document.getElementById('btnup')
 
 window.onscroll = function() {
   if (window.scrollY >= 200) {
-    btnup.style.display = "block";
+    btnup.style.display = "flex";
   } else {
     btnup.style.display = "none";
   }

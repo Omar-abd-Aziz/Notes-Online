@@ -157,6 +157,18 @@ hr{
 
 
 
+
+@media (max-width: 599px) {
+  
+  #text {
+    padding: 4px 8px;
+  }
+
+}
+
+
+
+
 @media (min-width: 600px) {
   
   #d1 #clear{
@@ -173,6 +185,9 @@ hr{
     position: absolute;
     left: calc(2% + 3px);
   }
+
+
+
   
   
   
@@ -276,7 +291,7 @@ hr{
   {
     font-family: sans-serif;
     font-size: 30px;
-    padding: 17px 0px;
+    /* padding: 17px 0px; */
   }
 
   body
@@ -300,20 +315,28 @@ hr{
 
 
 #btnup {
-  border: none;
-  padding: 5px;
-  border-radius: 30px;
-  font-size: 30px;
-  cursor: pointer;
-  background: transparent;
-  color: white;
+  width: 25px;
+  height: 25px;
+  background: white;
+  border-radius: 50%;
   position: fixed;
-  right: 1%;
   top: 90%;
-  display: none;
-  z-index: 1;
+  right: 4%;
+  cursor: pointer;
   user-select: none;
+  padding: 5px;
+  z-index: 1;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+
+#btnup i{
+  font-size: 25px;
+}
+
 
 
 
@@ -923,7 +946,7 @@ hr{
   {
     font-family: sans-serif;
     font-size: 30px;
-    padding: 17px 0px;
+    /* padding: 17px 0px; */
   }
 
   body
